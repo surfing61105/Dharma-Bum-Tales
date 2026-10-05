@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "TJ SITE"
+public_folder: "TJ SITE"
+
+collections:
+  - name: "posts"
+    label: "Essays"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Is Read First?", name: "is_featured", widget: "boolean", default: false, required: false}
+      - {label: "Short Preview", name: "preview", widget: "text", hint: "A short 1-2 sentence hook for the dropdown"}
+      - {label: "Body", name: "body", widget: "markdown"}

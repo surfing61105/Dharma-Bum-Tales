@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | Terry James</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body class="single-post">
+    <header class="post-nav">
+        <a href="/" class="logo">Dharma Bum Tales</a>
+        <div class="subhead">Back to Home</div>
+    </header>
+
+    <article class="full-article container">
+        <div class="article-header">
+            <div class="post-meta">
+                <span>{{ date | readableDate }}</span>
+            </div>
+            <h1 class="article-title">{{ title }}</h1>
+        </div>
+        
+        {% if image %}
+        <div class="article-image-wrapper">
+            <img src="/{{ image }}" alt="{{ title }}" class="article-hero-image">
+        </div>
+        {% endif %}
+
+        <div class="article-content">
+            {{ content | safe }}
+        </div>
+    </article>
+
+    <footer>
+        <p>&copy; 2026 Terry James. All rights reserved.</p>
+    </footer>
+</body>
+</html>
