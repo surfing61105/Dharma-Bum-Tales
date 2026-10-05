@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dharmabum Tales | Terry James</title>
+    <meta name="description" content="A Dharma Bums Perspective - i left home at 14 ~ i am now 74 ~ i have been adventuring ever since.">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/index.css">
+    
+    <!-- Netlify Identity Widget for logging into the CMS -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+    
+    <header>
+        <a href="#" class="logo">Dharma Bum Tales</a>
+        <div class="subhead">A Dharma Bums Perspective</div>
+    </header>
+
+    <section class="hero" style="background-image: url('TJ SITE/spiritual_hero_offcenter.jpg');">
+        <div class="hero-content">
+            <div class="profile-wrapper">
+                <img src="TJ SITE/0927f21d-f739-4652-a9ff-2f1d1fc2873e_2342x2073.webp" alt="Terry James" class="profile-img">
+            </div>
+            
+            <h1>Terry James</h1>
+            <div class="tagline">
+                <p>i left home at 14 ~ i am now 74 ~ i have been adventuring ever since.</p>
+                <p>These posts loosely intertwine these experiences with lessons learned and wisdom gained stumbling along 'The Road Less Traveled'.</p>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="#essays" class="btn btn-primary">Read Essays</a>
+                <a href="https://www.buymeacoffee.com/terryjames" target="_blank" class="btn btn-bmc">Buy Me a Coffee</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <main>
+            <section class="mission-section">
+                <h2 class="section-title">Who I Write For</h2>
+                <div class="mission-content">
+                    <p>I write for the younger version of myself. For the seekers, the wanderers, and those who feel the pull of a life beyond the ordinary scripts.</p>
+                    <p>My goal is to share the raw lessons of a lifetime spent exploring—both the physical world and the inner landscape. If these tales of missteps, triumphs, and quiet realizations can offer you a bit of clarity or courage on your own journey, then they have served their purpose.</p>
+                </div>
+            </section>
+
+            <!-- SECTION 1: Read First -->
+            <section id="read-first" style="margin-bottom: var(--spacing-xl);">
+                <h2 class="section-title">Read First</h2>
+                <div class="post-list">
+                    {% for post in collections.posts | reverse %}
+                        {% if post.data.is_featured %}
+                        <article class="post-card featured-post">
+                            <div class="post-header" onclick="togglePost(this)">
+                                {% if post.data.image %}
+                                <img src="/{{ post.data.image }}" alt="{{ post.data.title }}" class="post-thumbnail" onerror="this.style.display='none'">
+                                {% endif %}
+                                <div class="post-header-text">
+                                    <div class="post-meta">
+                                        <span>{{ post.date | readableDate }}</span>
+                                    </div>
+                                    <h3 class="post-title">{{ post.data.title }}</h3>
+                                    <p class="click-instruction">Click to preview</p>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-content-inner">
+                                    <p class="preview-text">{{ post.data.preview }}</p>
+                                    <a href="{{ post.url }}" class="btn btn-primary btn-read-full">Read Full Article</a>
+                                </div>
+                            </div>
+                        </article>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- SECTION 2: Latest Essays -->
+            <section id="essays" style="margin-bottom: var(--spacing-xl);">
+                <h2 class="section-title">Latest Essays</h2>
+                
+                <div class="post-list">
+                    {% for post in collections.posts | reverse %}
+                        {% if not post.data.is_featured %}
+                        <article class="post-card">
+                            <div class="post-header" onclick="togglePost(this)">
+                                {% if post.data.image %}
+                                <img src="/{{ post.data.image }}" alt="{{ post.data.title }}" class="post-thumbnail" onerror="this.style.display='none'">
+                                {% endif %}
+                                <div class="post-header-text">
+                                    <div class="post-meta">
+                                        <span>{{ post.date | readableDate }}</span>
+                                    </div>
+                                    <h3 class="post-title">{{ post.data.title }}</h3>
+                                    <p class="click-instruction">Click to preview</p>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-content-inner">
+                                    <p class="preview-text">{{ post.data.preview }}</p>
+                                    <a href="{{ post.url }}" class="btn btn-primary btn-read-full">Read Full Article</a>
+                                </div>
+                            </div>
+                        </article>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- SECTION 3: View full writing list -->
+            <section id="index">
+                <h2 class="section-title" style="font-size: 2rem;">Full Writing List</h2>
+                <div class="index-list">
+                    <ul>
+                        {% for post in collections.posts | reverse %}
+                        <li>
+                            <a href="{{ post.url }}">
+                                <span class="index-title">{{ post.data.title }}</span>
+                                <span class="index-date">{{ post.date | readableDate }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer>
+            <p>&copy; 2026 Terry James. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="/script.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+</body>
+</html>
